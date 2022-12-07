@@ -87,7 +87,7 @@ $a = mysqli_query($con,"select * from product where cat_id = '$id' and shop_id =
         ?>
             <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
             <div class="icon-box">
-              <img src="assets/img/new/orange.jfif" height="100" width="140" alt="">
+              <img src="assets/img/new/<?php echo $b['image']; ?>" height="100" width="140" alt="">
               <h4><?php echo $b['product']; ?></h4>
               <p>Availability  :   <b><?php echo $b['stock']; ?></b></p>
               <p>Price         :   <b><?php echo $b['price']; ?></b></p>

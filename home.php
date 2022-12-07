@@ -47,7 +47,7 @@
         <i class="bi bi-phone-fill phone-icon"></i> +1 5589 55488 55
       </div>
       <div class="cta d-none d-md-block">
-        <a href="login.php" class="scrollto">LOGIN</a>
+        <a href="logout.php" class="scrollto">LOGOUT</a>
       </div>
     </div>
   </div>
@@ -102,9 +102,9 @@ include 'admin_sidebar.php';
   </section><!-- End Hero -->
 
   <main id="main">
-
+<br><br><br><br><br>
     <!-- ======= Icon Boxes Section ======= -->
-    <section id="icon-boxes" class="icon-boxes">
+    <!-- <section id="icon-boxes" class="icon-boxes">
       <div class="container">
 
         <div class="row">
@@ -143,7 +143,8 @@ include 'admin_sidebar.php';
         </div>
 
       </div>
-    </section><!-- End Icon Boxes Section -->
+    </section> -->
+    <!-- End Icon Boxes Section -->
 
     <!-- ======= About Us Section ======= -->
   

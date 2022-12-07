@@ -1,6 +1,6 @@
 <?php
 include 'connection.php';
-$query = mysqli_query($con,"select * from supermarket");
+$query = mysqli_query($con,"select * from supermarket join login on supermarket.login_id = login.login_id");
 
 ?>
 <!DOCTYPE html>
@@ -115,7 +115,7 @@ include 'admin_sidebar.php';
             <?php
             if($row['status']==0){
             ?>
-                <td><a href="approve.php?id=<?php echo $row['shop_id']; ?>" class="btn btn-warning">Pending</a></td>
+                <td><a href="approve.php?id=<?php echo $row['login_id']; ?>" class="btn btn-warning">Pending</a></td>
             <?php
             }
             if($row['status']==1){

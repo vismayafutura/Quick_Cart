@@ -10,8 +10,25 @@ if(isset($_POST['sub'])){
     $stock = $_POST['stock'];
     $exp_date = $_POST['exp_date'];
     $price = $_POST['price'];
+    $image = $_FILES['image']['name'];
+    if ($image != "") {
+        $filearray = pathinfo($_FILES['image']['name']);
+        // var_dump($filearray);exit();
 
-    mysqli_query($con,"insert into product(shop_id,product,stock,exp_date,price,cat_id)values('$log','$product','$stock','$exp_date','$price','$category') ");
+        $file1 = rand();
+        $file_ext = $filearray["extension"];
+
+
+
+
+        $filenew = $file1 . "." . $file_ext;
+        // var_dump($filenew);exit();
+        move_uploaded_file($_FILES['image']['tmp_name'], "assets/img/new/" . $filenew);
+        //var_dump($filenew);exit();
+    }
+
+    mysqli_query($con,"insert into product(shop_id,product,stock,exp_date,price,cat_id,image)values('$log','$product','$stock','$exp_date','$price','$category','$filenew') ");
+    echo"<script>window.location.href='shop_home.php';</script>";
 }
 ?>
 <!DOCTYPE html>
@@ -88,7 +105,7 @@ if(isset($_POST['sub'])){
 
           <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="100">
 
-            <form method="post" role="form" class="">
+            <form method="post" role="form" class="" enctype="multipart/form-data">
             <div class="form-group mt-3">
                 <select name="category" id="" class="form-control">
                 <?php
@@ -106,7 +123,7 @@ if(isset($_POST['sub'])){
                   <input type="text" name="product" class="form-control" id="name" placeholder="Product" required>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="file" class="form-control" name="image" id="email" placeholder="" required>
+                  <input type="file" class="form-control" name="image" placeholder="" required>
                 </div>
               </div>
               <div class="form-group mt-3">

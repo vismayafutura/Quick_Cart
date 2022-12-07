@@ -12,6 +12,7 @@ if(isset($_POST['sub'])){
   mysqli_query($con,"insert into login (username,password,type)values('$username','$password','shop')");
   $log = mysqli_insert_id($con);
   mysqli_query($con,"insert into supermarket(login_id,name,place,email,mobile,description)values('$log','$name','$place','$email','$mobile','$description')");
+  header("location:index.php");
 }
 ?>
 <!DOCTYPE html>
@@ -61,7 +62,7 @@ if(isset($_POST['sub'])){
     <div class="container d-flex align-items-center justify-content-between">
 
       <h1 class="logo"><a href="index.html">Supermarket Registration</a></h1>
-      <a href="login.php" class="btn btn-warning">LOGIN</a>
+      <a href="index.php" class="btn btn-warning">LOGIN</a>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href=index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 

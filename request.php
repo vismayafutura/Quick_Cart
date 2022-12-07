@@ -2,8 +2,16 @@
 session_start();
 $shop = $_SESSION['login_id'];
 include 'connection.php';
-$query = mysqli_query($con,"select * from request join customers on request.cus_id = customers.login_id ");
+$query = mysqli_query($con, "select * from request join customers on request.cus_id = customers.login_id join product on product.product_id = request.product_id ");
+$query1 = mysqli_query($con, "select * from request join customers on request.cus_id = customers.login_id join product on product.product_id = request.product_id ");
 
+$reque = mysqli_fetch_assoc($query1
+);
+$req = $reque['req_id'];
+// echo $req;
+
+$sts =  mysqli_query($con, "select * from request where req_id = '$req'");
+$st = mysqli_fetch_assoc($sts);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,26 +51,30 @@ $query = mysqli_query($con,"select * from request join customers on request.cus_
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
   <style>
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-      tr {
-        background-color: #f5f5f5;
-      }
-      th,
-      td {
-        padding: 15px;
-        text-align: left;
-        border-bottom: 1px solid #ccc;
-      }
-      tr:hover {
-        background-color: #cdcdcd;
-      }
-      .a{
-        border-radius: 25px;
-      }
-    </style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    tr {
+      background-color: #f5f5f5;
+    }
+
+    th,
+    td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    tr:hover {
+      background-color: #cdcdcd;
+    }
+
+    .a {
+      border-radius: 25px;
+    }
+  </style>
 </head>
 
 <body style="background-color:#c20909e8;">
@@ -75,78 +87,114 @@ $query = mysqli_query($con,"select * from request join customers on request.cus_
         <i class="bi bi-phone-fill phone-icon"></i> +1 5589 55488 55
       </div>
       <div class="cta d-none d-md-block">
-        <a href="login.php" class="scrollto">LOGIN</a>
+        <a href="logout.php" class="scrollto">LOGOUT</a>
       </div>
     </div>
   </div>
 
   <!-- ======= Header ======= -->
- <?php
-include 'shop_header.php';
- ?>
-<br>
+  <?php
+  include 'shop_header.php';
+  ?>
+  <br>
   <!-- ======= Hero Section ======= -->
   <!-- End Hero -->
 
   <main id="main">
-<br><br><br><br><br><br>
+    <br><br><br><br><br><br>
     <!-- ======= Icon Boxes Section ======= -->
-   <center>
-    <div style="width: 30cm;">
+    <center>
+      <div style="width: 30cm;">
 
-    <table class="a" >
-      <tr>
-        <th>Sl no</th>
-        <th> Name</th>
-        <th>Place</th>
-        <th> Mobile</th>
-        <th>Email</th>
-      </tr>
-      <?php 
-      $count= 0;
-        while($row = mysqli_fetch_assoc($query)){
-            $count++;
-            ?>
-            <tr>
-            <td><?php echo $count; ?></td>
-            <td><?php echo $row['cus_id'] ?></td>
-            <td><?php echo $row['product_id'] ?></td>
-            <td><?php echo $row['quandity'] ?></td>
-            <td><?php echo $row['val'] ?></td>
-           
+        <table class="a">
+          <tr>
+            <th>Sl no</th>
+            <th> Name</th>
+            <th>Place</th>
+            <th> Mobile</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>total</th>
+            <th></th>
+          </tr>
           <?php
-        }
-      ?>
-      
-     
-    </table>
-    </div>
+          $count = 0;
+          while ($row = mysqli_fetch_assoc($query)) {
+            $price = $row['price'];
+            $quandity = $row['quandity'];
+            $tot = $price * $quandity;
+            $count++;
+          ?>
+            <tr>
+              <td><?php echo $count; ?></td>
+              <td><?php echo $row['name'] ?></td>
+              <td><?php echo $row['place'] ?></td>
+              <td><?php echo $row['mobile'] ?></td>
+              <td><?php echo $row['product'] ?></td>
+              <td><?php echo $row['quandity'] ?></td>
+              <td><?php echo $row['price'] ?></td>
+              <td><?php echo $tot; ?></td>
+              <td>
+              <?php
+            
+              if ($st['status'] == '0') {
+              ?>
+               <a href="status.php?id=<?php echo $row['req_id']; ?>" class="btn btn-primary">Confirm</a>
+              <?php
+              }
+              ?>
+              <?php
+               if ($st['status'] == '1') {
+              ?>
+                <a href="statusdl.php?id=<?php echo $row['req_id']; ?>" class="btn btn-primary">Packing</a>
+              <?php
+              }
+              ?>
+              <?php
+               if ($st['status'] == '2') {
+              
+              ?>
+
+              <a href="statusdl.php?id=<?php echo $row['req_id']; ?>" class="btn btn-primary">Delivered</a>
+              <?php
+              }
+              ?>
+                </td>
+
+            <?php
+          }
+            ?>
+
+
+        </table>
+      </div>
     </center>
     <br>
     <!-- ======= About Us Section ======= -->
-  
+
 
     <!-- ======= Clients Section ======= -->
-    
+
 
     <!-- ======= Why Us Section ======= -->
- 
+
 
     <!-- ======= Services Section ======= -->
-  
+
     <!-- ======= Cta Section ======= -->
-  
+
 
     <!-- ======= Portfoio Section ======= -->
- 
+
 
     <!-- ======= Team Section ======= -->
- 
+
     <!-- ======= Pricing Section ======= -->
-  
+
 
     <!-- ======= Frequently Asked Questions Section ======= -->
-  
+
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -182,7 +230,7 @@ include 'shop_header.php';
 
           </div>
 
-        
+
 
         </div>
 
@@ -195,9 +243,9 @@ include 'shop_header.php';
   <footer id="footer">
 
 
-  
 
-   
+
+
   </footer><!-- End Footer -->
 
   <div id="preloader"></div>

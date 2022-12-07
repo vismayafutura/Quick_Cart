@@ -12,6 +12,11 @@ if ($sql->num_rows > 0) {
 
         $myarray['id'] = $row['product_id'];
         $myarray['product'] = $row['product'];
+        $myarray['sid'] = $row['shop_id'];
+        $myarray['image'] = $row['image'];
+        
+        
+        
    
 
 

@@ -15,8 +15,8 @@
               <li><a href="product_view.php">View Product</a></li>
             </ul>
           </li>
-          <li><a class="nav-link scrollto " href="request.php">Order Request</a></li>
-          <li><a class="nav-link scrollto" href="#team">Order History</a></li>
+          <!-- <li><a class="nav-link scrollto " href="request.php">Order Request</a></li> -->
+          <li><a class="nav-link scrollto" href="order_history.php">Order History</a></li>
           <li><a class="nav-link scrollto" href="#pricing">Manage Customer</a></li>
           <li><a href="blog.html">Complaint</a></li>
           <!-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>

@@ -4,7 +4,7 @@ include 'connection.php';
 $id = $_POST['id'];
 $feedback = $_POST['feedback'];
 
-mysqli_query($con, "INSERT INTO feedback(customer_id,feedback)values('$id','$feedback')");
+$sql = mysqli_query($con, "INSERT INTO feedback(customer_id,feedback)values('$id','$feedback')");
 
 if ($sql) {
 

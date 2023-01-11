@@ -7,7 +7,7 @@ $email = $_POST['email'];
 $mobile = $_POST['mobile'];
 $username = $_POST['username'];
 $password = $_POST['password'];
-mysqli_query($con, "INSERT INTO login(username,password)values('$username','$password')");
+mysqli_query($con, "INSERT INTO login(username,password,type)values('$username','$password','customer')");
 $log = mysqli_insert_id($con);
 $sql = mysqli_query($con, "INSERT INTO customers(login_id,name,email,mobile,place)values('$log','$name','$email','$mobile','$place')");
 

@@ -9,6 +9,7 @@ if(isset($_POST['sub'])){
     if(mysqli_num_rows($query)>0){
        $data = mysqli_fetch_assoc($query);
        $_SESSION['login_id'] = $data['login_id'];
+       
 
        if($data['type']=='admin'){
 

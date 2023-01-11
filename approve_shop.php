@@ -73,7 +73,7 @@ $query = mysqli_query($con,"select * from supermarket join login on supermarket.
         <i class="bi bi-phone-fill phone-icon"></i> +1 5589 55488 55
       </div>
       <div class="cta d-none d-md-block">
-        <a href="login.php" class="scrollto">LOGIN</a>
+        <a href="logout.php" class="scrollto">LOGOUT</a>
       </div>
     </div>
   </div>

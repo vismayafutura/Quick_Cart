@@ -1,6 +1,6 @@
 <?php
 include 'connection.php';
-$a = mysqli_query($con,"select * from feedback join customers on customers.cus_id = feedback.customer_id");
+$a = mysqli_query($con,"select * from feedback join customers on customers.login_id = feedback.customer_id");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -51,7 +51,7 @@ $a = mysqli_query($con,"select * from feedback join customers on customers.cus_i
         <i class="bi bi-phone-fill phone-icon"></i> +1 5589 55488 55
       </div>
       <div class="cta d-none d-md-block">
-        <a href="login.php" class="scrollto">LOGIN</a>
+        <a href="logout.php" class="scrollto">LOGOUT</a>
       </div>
     </div>
   </div>

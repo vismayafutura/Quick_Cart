@@ -2,15 +2,14 @@
 session_start();
 $shop = $_SESSION['login_id'];
 include 'connection.php';
-$query = mysqli_query($con, "select * from request join customers on request.cus_id = customers.login_id join product on product.product_id = request.product_id ");
-$query1 = mysqli_query($con, "select * from request join customers on request.cus_id = customers.login_id join product on product.product_id = request.product_id ");
+$query = mysqli_query($con, "select customers.name,request.req_id,customers.email,request.status,customers.mobile,customers.place,product.product,request.quandity,product.price from request join customers on request.cus_id = customers.login_id join product on product.product_id = request.product_id ");
+// $query1 = mysqli_query($con, "select * from request join customers on request.cus_id = customers.login_id join product on product.product_id = request.product_id ");
 
-$reque = mysqli_fetch_assoc($query1
-);
-$req = $reque['req_id'];
+// $reque = mysqli_fetch_assoc($query1);
+// $req = $reque['req_id'];
 // echo $req;
 
-$sts =  mysqli_query($con, "select * from request where req_id = '$req'");
+$sts =  mysqli_query($con, "select * from request ");
 $st = mysqli_fetch_assoc($sts);
 ?>
 <!DOCTYPE html>
@@ -135,28 +134,33 @@ $st = mysqli_fetch_assoc($sts);
               <td><?php echo $row['quandity'] ?></td>
               <td><?php echo $row['price'] ?></td>
               <td><?php echo $tot; ?></td>
-              <td>
+             
               <?php
             
-              if ($st['status'] == '0') {
+              if ($row['status'] == '0') {
               ?>
+              <td>
                <a href="status.php?id=<?php echo $row['req_id']; ?>" class="btn btn-primary">Confirm</a>
+               </td>
+             <?php
+              }
+              ?>
+              <?php
+               if ($row['status'] == '1') {
+              ?>
+              <td>
+                <a href="" class="btn btn-primary">Packing</a>
+                </td>
               <?php
               }
               ?>
               <?php
-               if ($st['status'] == '1') {
-              ?>
-                <a href="statusdl.php?id=<?php echo $row['req_id']; ?>" class="btn btn-primary">Packing</a>
-              <?php
-              }
-              ?>
-              <?php
-               if ($st['status'] == '2') {
+               if ($row['status'] == '2') {
               
               ?>
-
-              <a href="statusdl.php?id=<?php echo $row['req_id']; ?>" class="btn btn-primary">Delivered</a>
+<td>
+              <a href="" class="btn btn-primary">Delivered</a>
+              </td>
               <?php
               }
               ?>

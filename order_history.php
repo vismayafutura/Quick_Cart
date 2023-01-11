@@ -1,7 +1,16 @@
 <?php
+session_start();
+$shop = $_SESSION['login_id'];
 include 'connection.php';
-$id = $_GET['id'];
-$a = mysqli_query($con,"select * from product where cat_id = '$id' ");
+$query = mysqli_query($con, "select * from history join customers on history.cus_id = customers.login_id  ");
+// $query1 = mysqli_query($con, "select * from request join customers on request.cus_id = customers.login_id join product on product.product_id = request.product_id ");
+
+// $reque = mysqli_fetch_assoc($query1);
+// $req = $reque['req_id'];
+// echo $req;
+
+// $sts =  mysqli_query($con, "select * from request ");
+// $st = mysqli_fetch_assoc($sts);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,9 +49,34 @@ $a = mysqli_query($con,"select * from product where cat_id = '$id' ");
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    tr {
+      background-color: #f5f5f5;
+    }
+
+    th,
+    td {
+      padding: 15px;
+      text-align: left;
+      border-bottom: 1px solid #ccc;
+    }
+
+    tr:hover {
+      background-color: #cdcdcd;
+    }
+
+    .a {
+      border-radius: 25px;
+    }
+  </style>
 </head>
 
-<body style="background-color: #ff4d4d;">
+<body style="background-color:#c20909e8;">
 
   <!-- ======= Top Bar ======= -->
   <div id="topbar" class="fixed-top d-flex align-items-center ">
@@ -52,79 +86,83 @@ $a = mysqli_query($con,"select * from product where cat_id = '$id' ");
         <i class="bi bi-phone-fill phone-icon"></i> +1 5589 55488 55
       </div>
       <div class="cta d-none d-md-block">
-        <a href="login.php" class="scrollto">LOGIN</a>
+        <a href="logout.php" class="scrollto">LOGOUT</a>
       </div>
     </div>
   </div>
 
   <!-- ======= Header ======= -->
- <?php
-include 'admin_sidebar.php';
- ?>
- 
-  <!-- End Header -->
-
+  <?php
+  include 'shop_header.php';
+  ?>
+  <br>
   <!-- ======= Hero Section ======= -->
- 
-<br><br><br>
+  <!-- End Hero -->
+
   <main id="main">
-<br><br><br>
+    <br><br><br><br><br><br>
     <!-- ======= Icon Boxes Section ======= -->
-    <section id="services" class="services">
-      <div class="container" data-aos="fade-up">
+    <center>
+      <div style="width: 30cm;">
 
-        <div class="section-title">
-          <h2>Categories</h2>
-        </div>
-
-        <div class="row">
-            <?php while($b = mysqli_fetch_assoc($a)) {
-        ?>
-            <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-            <div class="icon-box">
-              <img src="assets/img/new/<?php echo $b['image']; ?>" height="100" width="140" alt="">
-              <h4><?php echo $b['product']; ?></h4>
-              <p>Availability  :   <b><?php echo $b['stock']; ?></b></p>
-              <p>Price         :   <b><?php echo $b['price']; ?></b></p>
-              <p>Exptiry       :   <b><?php echo $b['exp_date']; ?></b></p>
-            </div>
-          </div>
+        <table class="a">
+          <tr>
+            <th>Sl no</th>
+            <th> Name</th>
+            
+            
+            <th>Method</th>
+            <!-- <th></th> -->
+          </tr>
           <?php
-            } ?>
-          
-          
-        
-         
-         
-        </div>
+          $count = 0;
+          while ($row = mysqli_fetch_assoc($query)) {
+            // $price = $row['price'];
+            // $quandity = $row['quandity'];
+            // $tot = $price * $quandity;
+            $count++;
+          ?>
+            <tr>
+              <td><?php echo $count; ?></td>
+              <td><?php echo $row['name'] ?></td>
+              <td><?php echo $row['method'] ?></td>
+            
+             
+                           
 
+            <?php
+          }
+            ?>
+
+
+        </table>
       </div>
-    </section><!-- End Services Section --><!-- End Icon Boxes Section -->
-
+    </center>
+    <br>
     <!-- ======= About Us Section ======= -->
-  
+
 
     <!-- ======= Clients Section ======= -->
-    
+
 
     <!-- ======= Why Us Section ======= -->
- 
+
 
     <!-- ======= Services Section ======= -->
-  
+
     <!-- ======= Cta Section ======= -->
-  
+
 
     <!-- ======= Portfoio Section ======= -->
- 
+
 
     <!-- ======= Team Section ======= -->
- 
+
     <!-- ======= Pricing Section ======= -->
-  
+
 
     <!-- ======= Frequently Asked Questions Section ======= -->
-  
+
 
     <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact">
@@ -160,7 +198,7 @@ include 'admin_sidebar.php';
 
           </div>
 
-        
+
 
         </div>
 
@@ -173,9 +211,9 @@ include 'admin_sidebar.php';
   <footer id="footer">
 
 
-  
 
-   
+
+
   </footer><!-- End Footer -->
 
   <div id="preloader"></div>
